@@ -1,12 +1,12 @@
-import { Inject } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import ITaskRepository from '../../Domain/Abstracts/ITaskRepository';
-import Id from '../../Domain/Values/Id';
+import TaskRepository from '../../Infra/Persistence/TaskRepository';
 import Task from '../../Task';
 
+@Injectable()
 export default class GetTask {
-  // constructor(@Inject('TASK_REPOSITORY') private repository: ITaskRepository) {}
+  constructor(@Inject(TaskRepository) private repository: ITaskRepository) {}
   async get(id: string): Promise<Task[]> {
-    // return this.repository.find({ id });
-    return [];
+    return this.repository.find({ id });
   }
 }

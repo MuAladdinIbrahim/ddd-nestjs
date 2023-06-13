@@ -1,14 +1,16 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
-import GetTask from '../../Application/Get/GetTask';
+import { QueryBus } from '@nestjs/cqrs';
 import { TaskModel } from '../../Infra/Persistence/task.model';
 import Task from '../../Task';
+import { GetTaskQuery } from '../../Application/Get/GetTaskQuery.query';
 
 @Resolver((of) => TaskModel)
 export class TaskResolver {
-  // constructor(private readonly repo: any) {}
+  constructor(private readonly queryBus: QueryBus) {}
   @Query((returns) => [TaskModel])
-  find(@Args('userId') id: string): Promise<Task[]> {
-    const getTask = new GetTask();
-    return getTask.get(id);
+  async find(@Args('userId') userId: string): Promise<Task[]> {
+    const query = new GetTaskQuery(userId);
+    const tasks: Task[] = await this.queryBus.execute(query);
+    return tasks;
   }
 }

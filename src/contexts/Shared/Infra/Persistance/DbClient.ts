@@ -3,12 +3,18 @@ import { IDbClient } from './IDbClient';
 
 @Injectable()
 export default class DbClient implements IDbClient {
-  find(query: any): Promise<any> {
-    return Promise.resolve([]);
+  constructor(public model: any) {
+    this.model = model;
   }
-  findOne(query: any): Promise<any> {
-    return Promise.resolve([]);
+
+  async find(query: any): Promise<any> {
+    return await this.model.findAll(query);
   }
+
+  async findOne(query: any): Promise<any> {
+    return await this.model.findOne(query);
+  }
+
   update(data: any): Promise<any> {
     return Promise.resolve([]);
   }
@@ -16,6 +22,7 @@ export default class DbClient implements IDbClient {
   delete(query: any): Promise<any> {
     return Promise.resolve([]);
   }
+
   insert(data: any): Promise<any> {
     return Promise.resolve([]);
   }

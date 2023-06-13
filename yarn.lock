@@ -967,6 +967,13 @@
     path-to-regexp "3.2.0"
     tslib "2.5.2"
 
+"@nestjs/cqrs@^9.0.4":
+  version "9.0.4"
+  resolved "https://registry.yarnpkg.com/@nestjs/cqrs/-/cqrs-9.0.4.tgz#be1a01971944869e8eed64f0d69a0514b5f21e29"
+  integrity sha512-nWDF+xs4jqs6OjxFg/wVSd0NiIV9+EFCJrJNTo4VRWe78CcAaitbp56CBspUh4gKyfkci95i+EhHdEqRXKFptg==
+  dependencies:
+    uuid "9.0.0"
+
 "@nestjs/graphql@^11.0.6":
   version "11.0.6"
   resolved "https://registry.yarnpkg.com/@nestjs/graphql/-/graphql-11.0.6.tgz#df0c488a30e0add93deaaca038c9da005e648aed"
