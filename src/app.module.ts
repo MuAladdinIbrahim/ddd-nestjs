@@ -4,6 +4,8 @@ import { configValidationSchema } from './infra/config.schema';
 import { DatabaseModule } from './infra/DB/DbModule';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { join } from 'path';
+import { taskMoudle } from './contexts/Task/Presentation/task.module';
 
 @Module({
   imports: [
@@ -13,10 +15,11 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
     }),
     DatabaseModule,
     GraphQLModule.forRoot<ApolloDriverConfig>({
-      // include: [],
       driver: ApolloDriver,
-      playground: false,
+      playground: true,
+      autoSchemaFile: join(process.cwd(), 'src/infra/schema.gql'),
     }),
+    taskMoudle,
   ],
   controllers: [],
   providers: [],

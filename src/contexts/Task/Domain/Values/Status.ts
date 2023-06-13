@@ -1,6 +1,5 @@
 import EnumValue from 'src/contexts/Shared/Values/EnumValue';
-
-const statusValues: string[] = ['open', 'done', 'in_progress', 'cancelled'];
+import { statusValues } from '../Abstracts/constants';
 
 export default class Status extends EnumValue {
   constructor(protected _value: string) {
