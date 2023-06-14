@@ -18,8 +18,9 @@ export default class CreateTask {
     descriptiion: Description,
     status: Status,
     userId: UserId,
-  ) {
+  ): Promise<Task> {
     const task: Task = Task.create(id, title, descriptiion, status, userId);
     await this.repository.save(task);
+    return task;
   }
 }

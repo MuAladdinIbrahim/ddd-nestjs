@@ -1,5 +1,6 @@
 import { Inject } from '@nestjs/common';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import Task from '../../Domain/Task';
 import { Description } from '../../Domain/Values/Description';
 import Id from '../../Domain/Values/Id';
 import Status from '../../Domain/Values/Status';
@@ -14,7 +15,7 @@ export default class CreateTaskHandler
 {
   constructor(@Inject(CreateTask) private readonly createTask: CreateTask) {}
 
-  async execute(command: CreateTaskCommand): Promise<void> {
+  async execute(command: CreateTaskCommand): Promise<Task> {
     return this.createTask.create(
       new Id(command.id),
       new Title(command.title),

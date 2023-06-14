@@ -19,7 +19,11 @@ export default class SequelizeDbClient implements IDbClient {
   }
 
   async update(query: any, updates): Promise<any> {
-    return await this.model.update(updates, { where: query });
+    const result = await this.model.update(updates, {
+      where: query,
+      returning: true,
+    });
+    return result[1][0].dataValues;
   }
 
   delete(query: any): Promise<any> {
