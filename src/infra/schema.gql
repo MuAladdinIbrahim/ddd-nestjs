@@ -28,3 +28,14 @@ type Query {
 input FindTasksArgs {
   userId: String!
 }
+
+type Mutation {
+  create(input: CreateTaskInput!): Task
+}
+
+input CreateTaskInput {
+  userId: String!
+  title: String!
+  description: String!
+  status: String!
+}

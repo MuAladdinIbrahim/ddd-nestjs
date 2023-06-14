@@ -7,10 +7,12 @@ import GetTask from '../Application/Get/GetTask';
 import TaskDbClient from '../Infra/Persistence/TaskDbClient';
 import { SequelizeModule } from '@nestjs/sequelize';
 import { TaskModel } from '../Infra/Persistence/task.model';
+import CreateTaskHandler from '../Application/Create/CreateTaskCommandHanlder';
+import CreateTask from '../Application/Create/CreateTask';
 
 const QueryHandlers = [GetTaskHandler];
-const CommandHandlers = [];
-const Actions = [GetTask];
+const CommandHandlers = [CreateTaskHandler];
+const Actions = [GetTask, CreateTask];
 
 @Module({
   imports: [CqrsModule, SequelizeModule.forFeature([TaskModel])],

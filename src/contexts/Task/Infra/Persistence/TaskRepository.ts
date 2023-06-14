@@ -1,16 +1,26 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { IDbClient } from 'src/contexts/Shared/Infra/Persistance/IDbClient';
 import ITaskRepository from '../../Domain/Abstracts/ITaskRepository';
-import { TaskModel } from './task.model';
+import Task from '../../Domain/Task';
 import TaskDbClient from './TaskDbClient';
 
 @Injectable()
 export default class TaskRepository implements ITaskRepository {
   constructor(@Inject(TaskDbClient) private dbClient: IDbClient) {}
 
-  async find(id: any): Promise<TaskModel | any> {
-    const task = await this.dbClient.find({ id });
+  async find(query: any): Promise<Task[]> {
+    const tasks = await this.dbClient.find(query);
     // serialize task table to Task
-    return task;
+    return tasks;
+  }
+
+  async save(task: Task): Promise<void> {
+    await this.dbClient.insert({
+      id: task.id.value,
+      title: task.title.value,
+      description: task.description.value,
+      status: task.status.value,
+      userId: task.userId.value,
+    });
   }
 }
