@@ -6,6 +6,8 @@ import { GetTaskQuery } from '../../Application/Get/GetTaskQuery.query';
 import FindTasksArgsDto from '../dtos/findTasksArgs.dto';
 import CreateTaskInputDto from '../dtos/createTaskInput.dto';
 import CreateTaskCommand from '../../Application/Create/CreateTaskCommand.command';
+import UpdateTaskStatusInputDto from '../dtos/updateTaskStatus.dto';
+import UpdateTaskStatusCommand from '../../Application/Update/UpdateTaskStatusCommand.command';
 
 @Resolver((of) => TaskModel)
 export class TaskResolver {
@@ -21,7 +23,7 @@ export class TaskResolver {
     return tasks;
   }
   @Mutation((returns) => TaskModel, { nullable: true })
-  async create(@Args('input') input: CreateTaskInputDto): Promise<Task> {
+  async create(@Args('input') input: CreateTaskInputDto): Promise<any> {
     const command = new CreateTaskCommand(
       null,
       input.title,
@@ -30,7 +32,27 @@ export class TaskResolver {
       input.userId,
     );
     const task: Task = await this.commandBus.execute(command);
-    // serialize task: Task into TaskModel
-    return task;
+    const response = {
+      id: task.id.value,
+      title: task.title.value,
+      status: task.status.value,
+      description: task.description.value,
+      userId: task.userId.value,
+    };
+    return response;
+  }
+
+  @Mutation((returns) => TaskModel, { nullable: true })
+  async update(@Args('input') input: UpdateTaskStatusInputDto): Promise<any> {
+    const command = new UpdateTaskStatusCommand(input.id, input.status);
+    const task: Task = await this.commandBus.execute(command);
+    const response = {
+      id: task.id,
+      title: task.title,
+      status: task.status,
+      description: task.description,
+      userId: task.userId,
+    };
+    return response;
   }
 }

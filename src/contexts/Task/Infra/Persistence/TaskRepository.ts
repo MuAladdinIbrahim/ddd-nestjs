@@ -14,6 +14,11 @@ export default class TaskRepository implements ITaskRepository {
     return tasks;
   }
 
+  async update(query, updates) {
+    const task = await this.dbClient.update(query, updates);
+    return task;
+  }
+
   async save(task: Task): Promise<void> {
     await this.dbClient.insert({
       id: task.id.value,

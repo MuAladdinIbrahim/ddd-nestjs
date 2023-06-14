@@ -31,11 +31,17 @@ input FindTasksArgs {
 
 type Mutation {
   create(input: CreateTaskInput!): Task
+  update(input: UpdateTaskStatusInput!): Task
 }
 
 input CreateTaskInput {
   userId: String!
   title: String!
   description: String!
+  status: String!
+}
+
+input UpdateTaskStatusInput {
+  id: String!
   status: String!
 }
