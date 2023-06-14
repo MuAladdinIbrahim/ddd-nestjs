@@ -11,6 +11,7 @@ export class TaskResolver {
   @Query((returns) => [TaskModel])
   async find(@Args('args') args: FindTasksArgs): Promise<Task[]> {
     const query = new GetTaskQuery(args.userId);
+    //TODO replace Task[] with GetTaskResponse
     const tasks: Task[] = await this.queryBus.execute(query);
     return tasks;
   }
