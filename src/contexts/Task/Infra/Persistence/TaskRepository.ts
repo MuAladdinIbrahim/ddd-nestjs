@@ -2,11 +2,10 @@ import { Inject, Injectable } from '@nestjs/common';
 import { IDbClient } from 'src/contexts/Shared/Infra/Persistance/IDbClient';
 import ITaskRepository from '../../Domain/Abstracts/ITaskRepository';
 import Task from '../../Domain/Task';
-import TaskDbClient from './TaskDbClient';
 
 @Injectable()
 export default class TaskRepository implements ITaskRepository {
-  constructor(@Inject(TaskDbClient) private dbClient: IDbClient) {}
+  constructor(@Inject('TASK_DB_CLIENT') private dbClient: IDbClient) {}
 
   async find(query: any): Promise<any[]> {
     const tasks = await this.dbClient.find(query);

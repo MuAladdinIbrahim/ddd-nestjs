@@ -13,7 +13,7 @@ import CreateTaskCommand from './CreateTaskCommand.command';
 export default class CreateTaskHandler
   implements ICommandHandler<CreateTaskCommand>
 {
-  constructor(@Inject(CreateTask) private readonly createTask: CreateTask) {}
+  constructor(@Inject('CREATE_TASK') private readonly createTask: CreateTask) {}
 
   async execute(command: CreateTaskCommand): Promise<Task> {
     return this.createTask.create(

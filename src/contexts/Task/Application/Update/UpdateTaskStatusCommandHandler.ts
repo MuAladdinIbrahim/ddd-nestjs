@@ -10,7 +10,7 @@ export default class UpdateTaskStatusHandler
   implements ICommandHandler<UpdateTaskStatusCommand>
 {
   constructor(
-    @Inject(UpdateTaskStatus)
+    @Inject('UPDATE_TASK_STATUS')
     private readonly updateTaskStatus: UpdateTaskStatus,
     private readonly publisher: EventPublisher,
   ) {}

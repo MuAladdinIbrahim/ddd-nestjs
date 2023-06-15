@@ -6,11 +6,13 @@ import Id from '../../Domain/Values/Id';
 import Status from '../../Domain/Values/Status';
 import { Title } from '../../Domain/Values/Title';
 import UserId from '../../Domain/Values/UserId';
-import TaskRepository from '../../Infra/Persistence/TaskRepository';
 
 @Injectable()
 export default class CreateTask {
-  constructor(@Inject(TaskRepository) private repository: ITaskRepository) {}
+  constructor(
+    @Inject('TASK_REPOSITORY')
+    private repository: ITaskRepository,
+  ) {}
 
   async create(
     id: Id,

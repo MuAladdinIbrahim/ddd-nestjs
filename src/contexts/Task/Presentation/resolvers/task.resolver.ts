@@ -22,6 +22,7 @@ export class TaskResolver {
     const tasks: Task[] = await this.queryBus.execute(query);
     return tasks;
   }
+
   @Mutation((returns) => TaskModel, { nullable: true })
   async create(@Args('input') input: CreateTaskInputDto): Promise<any> {
     const command = new CreateTaskCommand(

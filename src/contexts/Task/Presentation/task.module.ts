@@ -12,13 +12,14 @@ import CreateTask from '../Application/Create/CreateTask';
 import UpdateTaskStatus from '../Application/Update/UpdateTaskStatus';
 import UpdateTaskStatusHandler from '../Application/Update/UpdateTaskStatusCommandHandler';
 import TaskSagas from '../Domain/Sagas/TaskSagas';
-import TaskUpdatedHandler from '../Domain/Events/TaskUpdatedHandler';
+import TaskUpdatedEventHandler from '../Domain/Events/TaskUpdatedEventHandler';
+import { TaskProviders } from './TaskProviders';
 
 const QueryHandlers = [GetTaskHandler];
 const CommandHandlers = [CreateTaskHandler, UpdateTaskStatusHandler];
 const Actions = [GetTask, CreateTask, UpdateTaskStatus];
 const Sagas = [TaskSagas];
-const EventsHandlers = [TaskUpdatedHandler];
+const EventsHandlers = [TaskUpdatedEventHandler];
 
 @Module({
   imports: [CqrsModule, SequelizeModule.forFeature([TaskModel])],
@@ -26,6 +27,7 @@ const EventsHandlers = [TaskUpdatedHandler];
     TaskResolver,
     TaskDbClient,
     TaskRepository,
+    ...TaskProviders,
     ...QueryHandlers,
     ...CommandHandlers,
     ...Actions,
