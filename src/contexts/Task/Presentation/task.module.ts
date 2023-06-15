@@ -13,7 +13,7 @@ import UpdateTaskStatus from '../Application/Update/UpdateTaskStatus';
 import UpdateTaskStatusHandler from '../Application/Update/UpdateTaskStatusCommandHandler';
 import TaskSagas from '../Domain/Sagas/TaskSagas';
 import TaskUpdatedEventHandler from '../Domain/Events/TaskUpdatedEventHandler';
-import { TaskProviders } from './TaskProviders';
+import { TaskInjections } from './Injections';
 
 const QueryHandlers = [GetTaskHandler];
 const CommandHandlers = [CreateTaskHandler, UpdateTaskStatusHandler];
@@ -27,7 +27,7 @@ const EventsHandlers = [TaskUpdatedEventHandler];
     TaskResolver,
     TaskDbClient,
     TaskRepository,
-    ...TaskProviders,
+    ...TaskInjections,
     ...QueryHandlers,
     ...CommandHandlers,
     ...Actions,

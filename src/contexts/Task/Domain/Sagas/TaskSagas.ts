@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Saga, ICommand, ofType } from '@nestjs/cqrs';
 import { Observable, map } from 'rxjs';
+import ReceiveMsgCommand from 'src/contexts/Coordinator/Application/ReceiveMsg/ReceiveMsgCommand';
 import TaskUpdatedEvent from '../Events/TaskUpdated';
 
 @Injectable()
@@ -10,7 +11,7 @@ export default class TaskSagas {
     return events$.pipe(
       ofType(TaskUpdatedEvent),
       map((event) => {
-        return Promise.resolve();
+        return new ReceiveMsgCommand(event.id, event.task);
       }),
     );
   };

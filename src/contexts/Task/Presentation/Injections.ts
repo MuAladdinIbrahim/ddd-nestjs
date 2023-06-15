@@ -12,25 +12,25 @@ export const TaskDependency = {
   TASK_DB_CLIENT: Symbol('TASK_DB_CLIENT'),
 };
 
-export const TaskProviders = [
+export const TaskInjections = [
   {
     provide: 'TASK_REPOSITORY',
-    useValue: TaskRepository,
+    useExisting: TaskRepository,
   },
   {
     provide: 'CREATE_TASK',
-    useValue: CreateTask,
+    useExisting: CreateTask,
   },
   {
     provide: 'GET_TASK',
-    useValue: GetTask,
+    useExisting: GetTask,
   },
   {
     provide: 'UPDATE_TASK_STATUS',
-    useValue: UpdateTaskStatus,
+    useExisting: UpdateTaskStatus,
   },
   {
     provide: 'TASK_DB_CLIENT',
-    useValue: TaskDbClient,
+    useExisting: TaskDbClient,
   },
 ];
