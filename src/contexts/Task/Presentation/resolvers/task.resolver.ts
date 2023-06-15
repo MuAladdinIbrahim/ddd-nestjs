@@ -47,11 +47,11 @@ export class TaskResolver {
     const command = new UpdateTaskStatusCommand(input.id, input.status);
     const task: Task = await this.commandBus.execute(command);
     const response = {
-      id: task.id,
-      title: task.title,
-      status: task.status,
-      description: task.description,
-      userId: task.userId,
+      id: task.id.value,
+      title: task.title.value,
+      status: task.status.value,
+      description: task.description.value,
+      userId: task.userId.value,
     };
     return response;
   }

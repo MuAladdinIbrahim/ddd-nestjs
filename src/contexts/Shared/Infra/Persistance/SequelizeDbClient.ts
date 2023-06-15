@@ -11,7 +11,10 @@ export default class SequelizeDbClient implements IDbClient {
   }
 
   async find(query: any): Promise<any> {
-    return await this.model.findAll(query);
+    return await this.model.findAll({
+      where: query,
+      raw: true,
+    });
   }
 
   async findOne(query: any): Promise<any> {

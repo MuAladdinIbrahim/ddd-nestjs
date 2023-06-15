@@ -8,9 +8,8 @@ import TaskDbClient from './TaskDbClient';
 export default class TaskRepository implements ITaskRepository {
   constructor(@Inject(TaskDbClient) private dbClient: IDbClient) {}
 
-  async find(query: any): Promise<Task[]> {
+  async find(query: any): Promise<any[]> {
     const tasks = await this.dbClient.find(query);
-    // serialize task table to Task
     return tasks;
   }
 

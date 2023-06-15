@@ -4,13 +4,14 @@ import Status from './Values/Status';
 import { Title } from './Values/Title';
 import UserId from './Values/UserId';
 import { AggregateRoot } from '@nestjs/cqrs';
+import TaskUpdatedEvent from './Events/TaskUpdated';
 
 export default class Task extends AggregateRoot {
   constructor(
     private readonly _id: Id,
     private readonly _title: Title,
     private readonly _description: Description,
-    private readonly _status: Status,
+    private _status: Status,
     private readonly _userId: UserId,
   ) {
     super();
@@ -32,6 +33,10 @@ export default class Task extends AggregateRoot {
     return this._status;
   }
 
+  set status(status: Status) {
+    this._status = status;
+  }
+
   get userId(): UserId {
     return this._userId;
   }
@@ -43,7 +48,13 @@ export default class Task extends AggregateRoot {
     status: Status,
     userId: UserId,
   ): Task {
-    // this.apply(new TaskCreatedEvent(id, title, description, status, userId));
     return new Task(id, title, description, status, userId);
+  }
+
+  update(updates: { status: Status }) {
+    const { status } = updates;
+    this.status = status;
+    this.apply(new TaskUpdatedEvent(this));
+    return this;
   }
 }

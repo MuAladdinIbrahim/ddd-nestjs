@@ -1,5 +1,5 @@
 import { Inject } from '@nestjs/common';
-import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { CommandHandler, ICommandHandler, EventPublisher } from '@nestjs/cqrs';
 import Id from '../../Domain/Values/Id';
 import Status from '../../Domain/Values/Status';
 import UpdateTaskStatus from './UpdateTaskStatus';
@@ -12,12 +12,17 @@ export default class UpdateTaskStatusHandler
   constructor(
     @Inject(UpdateTaskStatus)
     private readonly updateTaskStatus: UpdateTaskStatus,
+    private readonly publisher: EventPublisher,
   ) {}
 
   async execute(command: UpdateTaskStatusCommand): Promise<void> {
-    return this.updateTaskStatus.update(
-      new Id(command.id),
-      new Status(command.status),
+    const task = this.publisher.mergeObjectContext(
+      await this.updateTaskStatus.update(
+        new Id(command.id),
+        new Status(command.status),
+      ),
     );
+    task.commit();
+    return task;
   }
 }
