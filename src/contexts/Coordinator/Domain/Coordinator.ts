@@ -10,4 +10,8 @@ export default class Coordinator implements ICoordinator {
     Logger.log('Redirecting message to queue');
     this._queue.add(msg);
   }
+
+  notify(input: any) {
+    Logger.log('Notifying message to subscriptors');
+  }
 }
