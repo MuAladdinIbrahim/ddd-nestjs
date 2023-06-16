@@ -6,6 +6,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { taskMoudle } from './contexts/Task/Presentation/task.module';
+import { UserModule } from './contexts/User/Presentation/user.module';
 import { CoordinatorModule } from './contexts/Coordinator/Presentation/coordinator.module';
 
 @Module({
@@ -21,6 +22,7 @@ import { CoordinatorModule } from './contexts/Coordinator/Presentation/coordinat
       autoSchemaFile: join(process.cwd(), 'src/infra/schema.gql'),
     }),
     taskMoudle,
+    UserModule,
     CoordinatorModule,
   ],
   controllers: [],
