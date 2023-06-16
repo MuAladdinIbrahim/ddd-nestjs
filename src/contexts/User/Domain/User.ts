@@ -22,6 +22,7 @@ export class User extends AggregateRoot {
   }
 
   static create(id: string, name: string, email: string) {
+    // fire event user-created to update task's contect local storage
     return new User(id, name, email);
   }
 }

@@ -6,7 +6,7 @@ import Task from '../../Domain/Task';
 export default class GetTask {
   constructor(@Inject('TASK_REPOSITORY') private repository: ITaskRepository) {}
   async get(userId: string): Promise<Task[]> {
-    // TODO select from users !!
+    //TODO use local storage to aggregate user into response if required
     return this.repository.find({ userId });
   }
 }

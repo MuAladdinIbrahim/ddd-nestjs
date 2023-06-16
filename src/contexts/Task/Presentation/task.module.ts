@@ -14,10 +14,17 @@ import UpdateTaskStatusHandler from '../Application/Update/UpdateTaskStatusComma
 import TaskSagas from '../Domain/Sagas/TaskSagas';
 import TaskUpdatedEventHandler from '../Domain/Events/TaskUpdatedEventHandler';
 import { TaskInjections } from './Injections';
+import MirrorData from '../Application/MirrorData/MirrorData';
+import MirrorDataHandler from '../Application/MirrorData/MirrorDataCommandHandler';
+import LocalStorage from '../Infra/Persistence/LocalStorage';
 
 const QueryHandlers = [GetTaskHandler];
-const CommandHandlers = [CreateTaskHandler, UpdateTaskStatusHandler];
-const Actions = [GetTask, CreateTask, UpdateTaskStatus];
+const CommandHandlers = [
+  CreateTaskHandler,
+  UpdateTaskStatusHandler,
+  MirrorDataHandler,
+];
+const Actions = [GetTask, CreateTask, UpdateTaskStatus, MirrorData];
 const Sagas = [TaskSagas];
 const EventsHandlers = [TaskUpdatedEventHandler];
 
@@ -27,6 +34,7 @@ const EventsHandlers = [TaskUpdatedEventHandler];
     TaskResolver,
     TaskDbClient,
     TaskRepository,
+    LocalStorage,
     ...TaskInjections,
     ...QueryHandlers,
     ...CommandHandlers,
