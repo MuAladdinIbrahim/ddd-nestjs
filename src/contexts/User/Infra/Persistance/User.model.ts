@@ -6,14 +6,16 @@ import {
   Default,
   CreatedAt,
   UpdatedAt,
+  Unique,
 } from 'sequelize-typescript';
 
 import { ObjectType, Field, ID } from '@nestjs/graphql';
 
 @ObjectType('User')
 @Table
-export class UserModel extends Model {
+export default class UserModel extends Model {
   @Default(DataType.UUIDV4)
+  @Unique(true)
   @Field((type) => ID)
   @Column({
     type: DataType.UUID,

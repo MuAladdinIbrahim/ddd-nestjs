@@ -1,5 +1,5 @@
 import { Module, OnModuleInit } from '@nestjs/common';
-import { UserModel } from '../Infra/Persistance/User.model';
+import UserModel from '../Infra/Persistance/User.model';
 import { SequelizeModule } from '@nestjs/sequelize';
 import SeedUsers from '../Infra/Persistance/SeedUsers';
 

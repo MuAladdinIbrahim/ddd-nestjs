@@ -6,7 +6,7 @@ type sequelizeModelType = typeof TaskModel;
 
 @Injectable()
 export default class SequelizeDbClient implements IDbClient {
-  constructor(public model: sequelizeModelType) {
+  constructor(public model: any) {
     this.model = model;
   }
 
