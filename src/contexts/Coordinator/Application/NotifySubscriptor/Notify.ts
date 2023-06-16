@@ -1,6 +1,7 @@
-import { Inject, Logger } from '@nestjs/common';
+import { Inject, Injectable, Logger } from '@nestjs/common';
 import ICoordinator from '../../Domain/Abstracts/ICoordinator';
 
+@Injectable()
 export default class Notify {
   constructor(
     @Inject('COORDINATOR') private readonly coordinator: ICoordinator,

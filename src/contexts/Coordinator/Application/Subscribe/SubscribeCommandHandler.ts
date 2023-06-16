@@ -4,7 +4,7 @@ import SubscribeCommand from './SubscribeCommand';
 import Subscribe from './Subscribe';
 
 @CommandHandler(SubscribeCommand)
-export default class ReceiveMsgCommandHandler
+export default class SubscribeCommandHandler
   implements ICommandHandler<SubscribeCommand>
 {
   constructor(@Inject('SUBSCRIBE') private readonly subscribe: Subscribe) {}

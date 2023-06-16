@@ -1,6 +1,7 @@
-import { Inject } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import ICoordinator from '../../Domain/Abstracts/ICoordinator';
 
+@Injectable()
 export default class Unubscribe {
   constructor(
     @Inject('COORDINATOR') private readonly coordinator: ICoordinator,

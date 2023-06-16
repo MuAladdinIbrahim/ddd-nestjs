@@ -1,3 +1,4 @@
+import Notify from '../Application/NotifySubscriptor/Notify';
 import ReceiveMsg from '../Application/ReceiveMsg/ReceiveMsg';
 import Subscribe from '../Application/Subscribe/Subscribe';
 import Unubscribe from '../Application/Unsubscribe/Unsubscribe';
@@ -24,5 +25,9 @@ export const injections = [
   {
     provide: 'UNSUBSCRIBE',
     useExisting: Unubscribe,
+  },
+  {
+    provide: 'NOTIFY',
+    useExisting: Notify,
   },
 ];
