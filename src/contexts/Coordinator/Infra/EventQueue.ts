@@ -1,5 +1,5 @@
 import { InjectQueue } from '@nestjs/bull';
-import { Injectable } from '@nestjs/common';
+import { Injectable, Logger } from '@nestjs/common';
 import { Queue } from 'bull';
 import IQueue from '../Domain/Abstracts/IQueue';
 
@@ -13,6 +13,11 @@ export default class EventQueue implements IQueue {
   }
 
   add(data: any) {
-    this.queue.add(data);
+    Logger.log(
+      `${JSON.stringify(data)} is going to be added into queue: ${
+        this.queue.name
+      }`,
+    );
+    this.queue.add('event-added', data);
   }
 }

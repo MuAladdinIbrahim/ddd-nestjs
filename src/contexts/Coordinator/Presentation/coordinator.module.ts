@@ -3,7 +3,7 @@ import ReceiveMsg from '../Application/ReceiveMsg/ReceiveMsg';
 import ReceiveMsgCommandHandler from '../Application/ReceiveMsg/ReceiveMsgCommandHandler';
 import { injections } from './Injections';
 import { BullModule } from '@nestjs/bull';
-import { EventProcessor } from '../Infra/EventProcessor';
+import EventProcessor from '../Infra/EventProcessor';
 import EventQueue from '../Infra/EventQueue';
 import Coordinator from '../Domain/Coordinator';
 import SubscribeCommandHandler from '../Application/Subscribe/SubscribeCommandHandler';
