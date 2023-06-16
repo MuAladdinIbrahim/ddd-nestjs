@@ -1,10 +1,13 @@
+import { Inject, Logger } from '@nestjs/common';
+import ICoordinator from '../../Domain/Abstracts/ICoordinator';
+
 export default class ReceiveMsg {
-  constructor() {
-    // TODO inject queue
-  }
+  constructor(
+    @Inject('COORDINATOR') private readonly coordinator: ICoordinator,
+  ) {}
 
   receive(input: { data: any; id: any }) {
-    // TODO push the message to its corresponding queue
-    console.log('Message received');
+    Logger.log('Message Received');
+    this.coordinator.redirect(input);
   }
 }

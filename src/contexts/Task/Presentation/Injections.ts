@@ -4,14 +4,6 @@ import UpdateTaskStatus from '../Application/Update/UpdateTaskStatus';
 import TaskDbClient from '../Infra/Persistence/TaskDbClient';
 import TaskRepository from '../Infra/Persistence/TaskRepository';
 
-export const TaskDependency = {
-  TASK_REPOSITORY: Symbol('TASK_REPOSITORY'),
-  CREATE_TASK: Symbol('CREATE_TASK'),
-  GET_TASK: Symbol('GET_TASK'),
-  UPDATE_TASK_STATUS: Symbol('UPDATE_TASK_STATUS'),
-  TASK_DB_CLIENT: Symbol('TASK_DB_CLIENT'),
-};
-
 export const TaskInjections = [
   {
     provide: 'TASK_REPOSITORY',
