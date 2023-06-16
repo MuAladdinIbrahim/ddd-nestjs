@@ -1,6 +1,6 @@
 import ReceiveMsg from '../Application/ReceiveMsg/ReceiveMsg';
 import Coordinator from '../Domain/Coordinator';
-import EventQueue from '../Infra/Queue';
+import EventQueue from '../Infra/EventQueue';
 
 export const injections = [
   {
