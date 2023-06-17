@@ -1,6 +1,13 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { configValidationSchema } from 'config.schema';
+import { configValidationSchema } from './infra/config.schema';
+import { DatabaseModule } from './infra/DB/DbModule';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { join } from 'path';
+import { taskMoudle } from './contexts/Task/Presentation/task.module';
+import { UserModule } from './contexts/User/Presentation/user.module';
+import { CoordinatorModule } from './contexts/Coordinator/Presentation/coordinator.module';
 
 @Module({
   imports: [
@@ -8,6 +15,15 @@ import { configValidationSchema } from 'config.schema';
       envFilePath: [`.env.stage.${process.env.STAGE}`],
       validationSchema: configValidationSchema,
     }),
+    DatabaseModule,
+    GraphQLModule.forRoot<ApolloDriverConfig>({
+      driver: ApolloDriver,
+      playground: true,
+      autoSchemaFile: join(process.cwd(), 'src/infra/schema.gql'),
+    }),
+    taskMoudle,
+    UserModule,
+    CoordinatorModule,
   ],
   controllers: [],
   providers: [],
